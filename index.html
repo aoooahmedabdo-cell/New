@@ -1,0 +1,1791 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>كلية كارديف - التحقق من الشهادة</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        /* ============================================================
+           الأنماط العامة (مدمجة من الملفين)
+           ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Tajawal', 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #0b1a2f;
+            line-height: 1.7;
+            direction: rtl;
+        }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ============================================================
+           الهيدر (من الملف الأول)
+           ============================================================ */
+        .site-header {
+            background: #fff;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .top-strip {
+            background: #0b1a2f;
+            color: #fff;
+            font-size: 0.8rem;
+            padding: 6px 0;
+        }
+        .strip-inner {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 6px 16px;
+        }
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #0b1a2f;
+        }
+        .logo-img {
+            height: 44px;
+            width: auto;
+            border-radius: 6px;
+        }
+        .logo small {
+            display: block;
+            font-weight: 400;
+            font-size: 0.65rem;
+            color: #64748b;
+        }
+        .menu {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+        .menu a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 6px 0;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+        }
+        .menu a:hover {
+            border-bottom-color: #0b1a2f;
+        }
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: 1px solid #ddd;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        /* ============================================================
+           الأزرار والعناوين المشتركة
+           ============================================================ */
+        section { padding: 60px 0; }
+        .section-head { text-align: center; margin-bottom: 40px; }
+        .section-head .eyebrow {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #2563eb;
+            background: #e0e7ff;
+            padding: 4px 14px;
+            border-radius: 30px;
+        }
+        .section-head h2 { font-size: 2rem; margin-top: 8px; }
+        .section-head p { color: #475569; max-width: 600px; margin: 8px auto 0; }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            border-radius: 40px;
+            font-weight: 600;
+            background: #0b1a2f;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .btn:hover { background: #1e2f4a; transform: translateY(-1px); }
+        .btn.dark { background: #0b1a2f; }
+        .btn.outline {
+            background: transparent;
+            color: #0b1a2f;
+            border: 2px solid #0b1a2f;
+        }
+        .btn.outline:hover { background: #0b1a2f; color: #fff; }
+        .btn-primary { background: #2563eb; }
+        .btn-primary:hover { background: #1d4ed8; }
+        .btn-outline {
+            background: transparent;
+            color: #0b1a2f;
+            border: 2px solid #0b1a2f;
+        }
+        .btn-outline:hover { background: #0b1a2f; color: #fff; }
+
+        /* ============================================================
+           بطاقة التحقق من الشهادة (المطورة من الملف الثاني)
+           ============================================================ */
+        .verify-hero {
+            padding: 40px 0 20px;
+        }
+        .verify-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 40px 44px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.07);
+            max-width: 620px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .verify-card .badge {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #2563eb;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 18px;
+            border-radius: 30px;
+            margin-bottom: 8px;
+        }
+        .verify-card h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 6px;
+        }
+        .verify-card p.sub {
+            color: #64748b;
+            margin-bottom: 22px;
+            font-size: 1.05rem;
+        }
+        .verify-form {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .verify-form input {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 40px;
+            font-size: 1.05rem;
+            outline: none;
+            transition: 0.2s;
+            font-family: inherit;
+            text-align: center;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+        .verify-form input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+        }
+        .verify-form input::placeholder {
+            letter-spacing: 0;
+            font-weight: 400;
+            color: #94a3b8;
+        }
+        .verify-error {
+            color: #b91c1c;
+            font-weight: 600;
+            margin-top: 16px;
+            min-height: 28px;
+        }
+
+        /* ============================================================
+           باقي أقسام الملف الأول (القسم الترويجي، البرامج، إلخ)
+           ============================================================ */
+        .hero-v2 { padding: 20px 0 40px; }
+        .hero-grid {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .hero-copy { flex: 1; min-width: 280px; }
+        .hero-kicker {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #2563eb;
+        }
+        .hero-copy h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin: 8px 0 16px;
+        }
+        .hero-copy p { font-size: 1.1rem; color: #475569; max-width: 520px; }
+        .hero-actions { margin-top: 24px; display: flex; gap: 14px; flex-wrap: wrap; }
+        .hero-image-wrap {
+            flex: 1;
+            min-width: 260px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        }
+        .hero-image-wrap img { width: 100%; height: 280px; object-fit: cover; }
+
+        .search-banners {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .search-banners img {
+            border-radius: 16px;
+            max-height: 120px;
+            object-fit: cover;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            flex: 1 1 200px;
+        }
+        .home-video-wrap {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        }
+        .home-video { width: 100%; display: block; max-height: 460px; object-fit: cover; }
+
+        .mission-grid {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .mission-grid>div:first-child { flex: 1; min-width: 220px; }
+        .mission-grid .eyebrow {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #2563eb;
+        }
+        .mission-grid h2 { font-size: 1.8rem; margin-top: 4px; }
+        .mission-list { flex: 1; min-width: 220px; display: flex; flex-direction: column; gap: 12px; }
+        .mission-list p {
+            background: #fff;
+            padding: 16px 24px;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            font-weight: 500;
+            border-right: 4px solid #2563eb;
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+        .program-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: 0.25s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .program-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.10);
+        }
+        .program-card .program-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: #e2e8f0;
+        }
+        .program-card .program-body {
+            padding: 20px 24px 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .program-card .program-body h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #0b1a2f;
+        }
+        .program-card .program-body p {
+            color: #475569;
+            font-size: 0.95rem;
+            margin-top: 4px;
+            flex: 1;
+        }
+        .program-card .program-body .program-tag {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #2563eb;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 4px 14px;
+            border-radius: 30px;
+            align-self: flex-start;
+            margin-top: 12px;
+        }
+
+        .portfolio-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .portfolio-card {
+            flex: 1;
+            min-width: 240px;
+            background: #0b1a2f;
+            color: #fff;
+            padding: 36px 32px;
+            border-radius: 24px;
+        }
+        .portfolio-card span {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+        .portfolio-card h2 { font-size: 1.8rem; margin: 8px 0 12px; }
+        .portfolio-card p { opacity: 0.85; }
+        .stats-grid {
+            flex: 2;
+            min-width: 240px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 16px;
+        }
+        .stat-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 20px 16px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: #fff;
+        }
+        .stat-card .stat-content {
+            position: relative;
+            z-index: 2;
+            background: rgba(11, 26, 47, 0.65);
+            padding: 10px 16px;
+            border-radius: 12px;
+            backdrop-filter: blur(4px);
+            width: 100%;
+        }
+        .stat-card strong { font-size: 1.6rem; display: block; }
+        .stat-card span { font-size: 0.8rem; opacity: 0.9; }
+
+        .about-grid {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .about-grid img {
+            flex: 1;
+            min-width: 240px;
+            border-radius: 20px;
+            max-height: 300px;
+            object-fit: cover;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+        }
+        .about-grid>div { flex: 1; min-width: 220px; }
+        .about-grid .eyebrow {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #2563eb;
+        }
+        .about-grid h2 { font-size: 2rem; margin: 4px 0 12px; }
+        .about-grid p { color: #475569; }
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .badges span {
+            background: #e0e7ff;
+            color: #1e3a8a;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+        }
+        .team-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            transition: 0.2s;
+        }
+        .team-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+        }
+        .team-card img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            margin: 0 auto 12px;
+            border: 3px solid #e0e7ff;
+            border-radius: 0;
+        }
+        .team-card h3 { font-size: 1.05rem; }
+        .team-card strong {
+            font-weight: 600;
+            color: #2563eb;
+            font-size: 0.85rem;
+        }
+        .team-card p { font-size: 0.9rem; color: #475569; margin-top: 4px; }
+
+        .contact-grid {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+        .contact-grid>div:first-child { flex: 1; min-width: 220px; }
+        .contact-grid .eyebrow {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #2563eb;
+        }
+        .contact-grid h2 { font-size: 1.8rem; margin: 4px 0 8px; }
+        .contact-grid>div:first-child p { color: #475569; }
+        .contact-card {
+            flex: 1;
+            min-width: 220px;
+            background: #fff;
+            padding: 28px 32px;
+            border-radius: 20px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+        .contact-card p { margin-bottom: 8px; }
+        .contact-card strong { color: #0b1a2f; }
+        .map-card {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+        .map-card iframe { width: 100%; height: 300px; border: 0; }
+
+        /* ============================================================
+           قسم التحقق القديم (الاسم + الرمز السري) من الملف الأول
+           ============================================================ */
+        .student-verify-section {
+            background: #fff;
+            border-radius: 24px;
+            padding: 40px;
+            margin: 40px auto;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.06);
+        }
+        .student-verify-section h2 { font-size: 1.8rem; margin-bottom: 8px; }
+        .student-verify-section .sub { color: #475569; margin-bottom: 24px; }
+        .verify-student-form {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            background: #f8fafc;
+            padding: 24px;
+            border-radius: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .verify-student-form .field {
+            flex: 1;
+            min-width: 160px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .verify-student-form label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #334155;
+        }
+        .verify-student-form input {
+            padding: 10px 14px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            background: #fff;
+            transition: 0.2s;
+        }
+        .verify-student-form input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+            outline: none;
+        }
+        .verify-student-form .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        /* ============================================================
+           نافذة عرض الطالب (للتحقق برقم الشهادة)
+           ============================================================ */
+        .student-profile-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            overflow-y: auto;
+            padding: 30px 20px;
+            animation: fadeIn 0.35s ease;
+        }
+        .student-profile-overlay.open {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .profile-modal {
+            background: #fff;
+            border-radius: 28px;
+            max-width: 980px;
+            width: 100%;
+            max-height: 95vh;
+            overflow-y: auto;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        .profile-modal .close-btn {
+            position: sticky;
+            top: 12px;
+            left: 12px;
+            float: left;
+            background: rgba(11, 26, 47, 0.08);
+            border: none;
+            font-size: 1.8rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            color: #0b1a2f;
+            font-weight: 300;
+            backdrop-filter: blur(4px);
+        }
+        .profile-modal .close-btn:hover {
+            background: rgba(11, 26, 47, 0.18);
+            transform: rotate(90deg);
+        }
+
+        .profile-grid {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0;
+        }
+        .profile-left {
+            flex: 1 1 320px;
+            background: #0b1a2f;
+            color: #fff;
+            padding: 44px 34px 40px;
+            border-radius: 28px 0 0 28px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .profile-left .student-photo {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            background: #1e2f4a;
+        }
+        .profile-left .student-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+        .profile-left .student-name-en {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.7;
+            margin-bottom: 12px;
+            direction: ltr;
+        }
+        .profile-left .student-id {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 4px 18px;
+            border-radius: 30px;
+            margin-bottom: 6px;
+        }
+        .profile-left .student-nationality {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+        .profile-left .cert-badge {
+            margin-top: 18px;
+            background: rgba(37, 99, 235, 0.25);
+            color: #93bbfc;
+            padding: 6px 24px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(37, 99, 235, 0.3);
+        }
+
+        .profile-right {
+            flex: 1 1 380px;
+            padding: 40px 38px 38px;
+            background: #fff;
+            border-radius: 0 28px 28px 0;
+        }
+        .profile-right .section-label {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #2563eb;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 2px 16px;
+            border-radius: 30px;
+            margin-bottom: 6px;
+        }
+        .profile-right h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #0b1a2f;
+            margin-bottom: 16px;
+        }
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 24px;
+            margin-bottom: 20px;
+        }
+        .detail-item {
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 10px;
+        }
+        .detail-item .label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .detail-item .value {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0b1a2f;
+            margin-top: 2px;
+        }
+        .detail-item .value.grade-excellent {
+            color: #16a34a;
+        }
+        .detail-item.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .certificate-image-wrap {
+            margin-top: 16px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+        }
+        .certificate-image-wrap img {
+            width: 100%;
+            display: block;
+            max-height: 320px;
+            object-fit: contain;
+            background: #fff;
+            padding: 12px;
+        }
+        .certificate-image-wrap .no-cert {
+            padding: 30px 20px;
+            text-align: center;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+        .certificate-image-wrap .no-cert span {
+            font-size: 2.4rem;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .cert-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+        .cert-actions .btn {
+            flex: 1;
+            min-width: 140px;
+            text-align: center;
+            font-size: 0.95rem;
+            padding: 10px 20px;
+        }
+
+        /* ============================================================
+           صفحة عرض الطالب القديمة (للتحقق بالاسم والرمز السري)
+           ============================================================ */
+        .student-profile-overlay-legacy {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #fff;
+            z-index: 9998;
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease;
+        }
+        .student-profile-overlay-legacy.open {
+            display: block;
+        }
+        .student-profile-container {
+            display: flex;
+            min-height: 100vh;
+            width: 100%;
+        }
+        .profile-left-legacy {
+            flex: 1;
+            min-height: 100vh;
+            background: #0b1a2f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 30px;
+            color: #fff;
+            text-align: center;
+            position: relative;
+        }
+        .profile-left-legacy .close-btn {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            border: none;
+            font-size: 1.6rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .profile-left-legacy .close-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        .profile-left-legacy .student-photo {
+            width: 260px;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 4px solid rgba(255,255,255,0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-bottom: 24px;
+        }
+        .profile-left-legacy .student-name {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+        .profile-left-legacy .student-id {
+            font-size: 1rem;
+            opacity: 0.7;
+            font-weight: 500;
+        }
+        .profile-left-legacy .student-code {
+            margin-top: 12px;
+            background: rgba(255,255,255,0.1);
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .profile-left-legacy .student-code strong {
+            font-weight: 600;
+            opacity: 0.8;
+        }
+        .profile-right-legacy {
+            flex: 1;
+            min-height: 100vh;
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 50px 40px;
+        }
+        .profile-right-legacy .certificate-section {
+            width: 100%;
+            max-width: 520px;
+        }
+        .profile-right-legacy .certificate-badge {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #2563eb;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 16px;
+            border-radius: 30px;
+            margin-bottom: 12px;
+        }
+        .profile-right-legacy .certificate-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0b1a2f;
+            margin-bottom: 6px;
+        }
+        .profile-right-legacy .certificate-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            margin-bottom: 16px;
+        }
+        .profile-right-legacy .certificate-status .status-icon {
+            font-size: 1.2rem;
+        }
+        .profile-right-legacy .certificate-status .status-text.uploaded {
+            color: #16a34a;
+            font-weight: 600;
+        }
+        .profile-right-legacy .certificate-status .status-text.not-uploaded {
+            color: #b91c1c;
+            font-weight: 600;
+        }
+        .profile-right-legacy .congrats-text {
+            background: #fff;
+            padding: 24px 28px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            margin: 16px 0 24px;
+            border-right: 4px solid #2563eb;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #1e293b;
+        }
+        .profile-right-legacy .congrats-text strong {
+            color: #0b1a2f;
+            font-weight: 700;
+        }
+        .profile-right-legacy .congrats-text .highlight {
+            color: #2563eb;
+            font-weight: 700;
+        }
+        .profile-right-legacy .certificate-link-btn {
+            display: inline-block;
+            padding: 14px 36px;
+            background: #0b1a2f;
+            color: #fff;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+            text-align: center;
+        }
+        .profile-right-legacy .certificate-link-btn:hover {
+            background: #1e2f4a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(11,26,47,0.2);
+        }
+        .profile-right-legacy .certificate-link-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        .profile-right-legacy .back-home {
+            margin-top: 30px;
+            color: #64748b;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+            border: none;
+            background: none;
+            font-family: inherit;
+        }
+        .profile-right-legacy .back-home:hover {
+            color: #0b1a2f;
+        }
+
+        /* ============================================================
+           تذييل الصفحة
+           ============================================================ */
+        .site-footer {
+            background: #0b1a2f;
+            color: #fff;
+            padding: 40px 0 20px;
+            margin-top: 20px;
+        }
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+        }
+        .footer-logo { color: #fff; }
+        .footer-logo small { color: #94a3b8; }
+        .footer-inner a {
+            color: #cbd5e1;
+            font-weight: 500;
+            margin: 0 8px;
+            transition: 0.2s;
+        }
+        .footer-inner a:hover { color: #fff; }
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #1e2f4a;
+            padding-top: 20px;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        /* ============================================================
+           تحسينات للشاشات الصغيرة
+           ============================================================ */
+        @media (max-width: 992px) {
+            .profile-left, .profile-left-legacy {
+                border-radius: 28px 28px 0 0;
+                min-height: auto;
+            }
+            .profile-right, .profile-right-legacy {
+                border-radius: 0 0 28px 28px;
+                min-height: auto;
+            }
+            .profile-grid, .student-profile-container {
+                flex-direction: column;
+            }
+            .profile-left .student-photo, .profile-left-legacy .student-photo {
+                width: 150px;
+                height: 150px;
+            }
+            .detail-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px 18px;
+            }
+            .profile-right-legacy {
+                align-items: center;
+                text-align: center;
+            }
+            .profile-right-legacy .certificate-section {
+                max-width: 100%;
+            }
+            .profile-right-legacy .congrats-text {
+                text-align: right;
+            }
+        }
+        @media (max-width: 768px) {
+            .menu {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 6px;
+                padding: 12px 0;
+            }
+            .menu.open { display: flex; }
+            .menu-toggle { display: block; }
+            .hero-copy h1 { font-size: 2rem; }
+            .verify-card { padding: 28px 20px; }
+            .verify-card h1 { font-size: 1.5rem; }
+            .verify-form { flex-direction: column; }
+            .verify-form input { min-width: auto; }
+            .programs-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+            .program-card .program-image { height: 160px; }
+            .student-verify-section { padding: 24px 16px; }
+            .verify-student-form { flex-direction: column; align-items: stretch; }
+            .profile-modal .close-btn, .profile-left-legacy .close-btn {
+                top: 8px;
+                left: 8px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.4rem;
+            }
+            .profile-left, .profile-left-legacy { padding: 30px 20px 24px; }
+            .profile-left .student-photo, .profile-left-legacy .student-photo { width: 120px; height: 120px; }
+            .profile-left .student-name, .profile-left-legacy .student-name { font-size: 1.4rem; }
+            .profile-right, .profile-right-legacy { padding: 28px 20px 24px; }
+            .profile-right h2, .profile-right-legacy .certificate-title { font-size: 1.2rem; }
+            .detail-grid { grid-template-columns: 1fr; gap: 6px 0; }
+            .cert-actions .btn { min-width: 100%; }
+            .strip-inner { flex-direction: column; align-items: center; text-align: center; }
+        }
+        @media (max-width: 480px) {
+            .hero-copy h1 { font-size: 1.6rem; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .programs-grid { grid-template-columns: 1fr; gap: 20px; }
+            .program-card .program-image { height: 180px; }
+            .team-card img { width: 70px; height: 70px; }
+            .profile-left .student-photo, .profile-left-legacy .student-photo { width: 100px; height: 100px; }
+            .profile-left .student-name, .profile-left-legacy .student-name { font-size: 1.2rem; }
+            .profile-right h2, .profile-right-legacy .certificate-title { font-size: 1.1rem; }
+            .verify-card h1 { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== الهيدر ===== -->
+    <header class="site-header">
+        <div class="top-strip">
+            <div class="container strip-inner">
+                <span>📘 كلية كارديف للدراسات العليا</span>
+                <span>📍 كارديف • المملكة المتحدة • تعليم عالمي</span>
+            </div>
+        </div>
+        <div class="container nav">
+            <a class="logo" href="#">
+                <img class="logo-img" src="https://cardiffcollege-uk.indxeg.com/uploads/settings/site_logo_1778873365_d4afd66f.jpg" alt="Logo" />
+                <span>كلية كارديف<small>المملكة المتحدة</small></span>
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="القائمة">☰ القائمة</button>
+            <nav class="menu" id="siteMenu">
+                <a href="#home">الرئيسية</a>
+                <a href="#programs">البرامج</a>
+                <a href="#verify">التحقق</a>
+                <a href="#portfolio">المحفظة</a>
+                <a href="#about">عن الكلية</a>
+                <a href="#contact">اتصل بنا</a>
+                <a href="#student-verify">تحقق الطالب</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="home">
+
+        <!-- ===== قسم التحقق برقم الشهادة ===== -->
+        <section id="verify" class="verify-hero">
+            <div class="container">
+                <div class="verify-card">
+                    <span class="badge">🔐 التحقق من الشهادة</span>
+                    <h1>التحقق من الشهادة</h1>
+                    <p class="sub">أدخل رقم الشهادة للتحقق من صحتها وعرض تفاصيل الشهادة المسجلة.</p>
+
+                    <form class="verify-form" id="verifyForm">
+                        <input type="text" id="certNumberInput" placeholder="" required />
+                        <button class="btn btn-primary" type="submit">تحقق الآن</button>
+                    </form>
+                    <div class="verify-error" id="verifyError"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== القسم الترويجي ===== -->
+        <section class="hero-v2">
+            <div class="container hero-grid">
+                <div class="hero-copy">
+                    <span class="hero-kicker">🏛️ كلية كارديف المهنية</span>
+                    <h1>مسارات مهنية للطلاب الطموحين حول العالم.</h1>
+                    <p>تقدم كلية كارديف المهنية تعليماً عالي الجودة، وتطويراً مهنياً، وخدمات التحقق من الشهادات للطلاب والمؤسسات عالمياً.</p>
+                    <div class="hero-actions">
+                        <a class="btn" href="#programs">استكشف البرامج</a>
+                        <a class="btn outline" href="#verify">التحقق من الشهادة</a>
+                    </div>
+                </div>
+                <div class="hero-image-wrap">
+                    <img src="https://cardiffcollege-uk.indxeg.com/uploads/settings/hero_image_1778704027_24ba9741.jpg" alt="كلية كارديف" />
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== اللافتات ===== -->
+        <section class="search-banners-section">
+            <div class="container">
+                <div class="search-banners">
+                    <img src="https://cardiffcollege-uk.indxeg.com/uploads/settings/search_banner_left_1778873072_a11a9a9e.jpg" alt="Banner 1" />
+                    <img src="https://cardiffcollege-uk.indxeg.com/uploads/settings/search_banner_right_1778873072_ce5528b5.jpg" alt="Banner 2" />
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== الفيديو ===== -->
+        <section class="home-video-section">
+            <div class="container">
+                <div class="home-video-wrap">
+                    <video class="home-video" src="https://cardiffcollege-uk.indxeg.com/uploads/settings/home_video_file_1778873436_e81a5e6c.mp4" controls playsinline preload="auto"></video>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== المهمة ===== -->
+        <section class="mission-band">
+            <div class="container mission-grid">
+                <div>
+                    <span class="eyebrow">🎯 مهمتنا</span>
+                    <h2>التعلم والبحث والنمو المهني بمعايير دولية.</h2>
+                </div>
+                <div class="mission-list">
+                    <p>المساهمة في المجتمع من خلال التعليم والبحث العلمي.</p>
+                    <p>تعزيز العلاقة الوثيقة بين التدريس والدراسة الأكاديمية والممارسة المهنية.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== بطاقات البرامج ===== -->
+        <section id="programs" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <span class="eyebrow">📚 برامج الكلية</span>
+                    <h2>البرامج المهنية</h2>
+                    <p>مسارات مهنية واضحة مصممة للتقدم الوظيفي.</p>
+                </div>
+                <div class="programs-grid">
+                    <div class="program-card">
+                        <img class="program-image" src="https://cardiffcollege-uk.indxeg.com/uploads/programs/program_1778873148_800e3d3b.jpg" alt="مسار البكالوريوس" />
+                        <div class="program-body">
+                            <h3>مسار البكالوريوس</h3>
+                            <p>تحضير للتقدم لدرجة البكالوريوس.</p>
+                            <span class="program-tag">بكالوريوس</span>
+                        </div>
+                    </div>
+                    <div class="program-card">
+                        <img class="program-image" src="https://cardiffcollege-uk.indxeg.com/uploads/programs/program_1778873159_a3ba0bf3.jpg" alt="مسار الدراسات العليا" />
+                        <div class="program-body">
+                            <h3>مسار الدراسات العليا</h3>
+                            <p>تحضير مهني لدراسات الماجستير.</p>
+                            <span class="program-tag">ماجستير</span>
+                        </div>
+                    </div>
+                    <div class="program-card">
+                        <img class="program-image" src="https://cardiffcollege-uk.indxeg.com/uploads/programs/program_1778873168_5b3ba1f2.jpg" alt="دبلوم مهني" />
+                        <div class="program-body">
+                            <h3>الدبلوم المهني</h3>
+                            <p>برامج مهنية عملية للتطوير الوظيفي.</p>
+                            <span class="program-tag">دبلوم</span>
+                        </div>
+                    </div>
+                    <div class="program-card">
+                        <img class="program-image" src="https://cardiffcollege-uk.indxeg.com/uploads/programs/program_1778873189_dec2b8ad.jpg" alt="الدراسات البحرية" />
+                        <div class="program-body">
+                            <h3>الدراسات البحرية المهنية</h3>
+                            <p>دراسات مهنية في النقل البحري والخدمات اللوجستية.</p>
+                            <span class="program-tag">بحري</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== المحفظة والإحصائيات ===== -->
+        <section id="portfolio" class="section portfolio-section">
+            <div class="container portfolio-grid">
+                <div class="portfolio-card">
+                    <span>📈 أكثر من 10 سنوات في التعليم</span>
+                    <h2>تشكيل المستقبل، بناء القادة</h2>
+                    <p>تقدم كلية كارديف المهنية تعليماً عالي الجودة ومسارات مهنية تمكّن الطلاب من تحقيق أهدافهم الأكاديمية والمهنية في بيئة عالمية.</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card" style="--stat-img:url(https://cardiffcollege-uk.indxeg.com/uploads/settings/stat_1_image_1778955717_d47a490a.jpg); background-image:var(--stat-img);">
+                        <div class="stat-content"><strong>10+</strong><span>سنوات في التعليم</span></div>
+                    </div>
+                    <div class="stat-card" style="--stat-img:url(https://cardiffcollege-uk.indxeg.com/uploads/settings/stat_2_image_1778955717_87fa95d6.jpg); background-image:var(--stat-img);">
+                        <div class="stat-content"><strong>عالمي</strong><span>مجتمع تعليمي</span></div>
+                    </div>
+                    <div class="stat-card" style="--stat-img:url(https://cardiffcollege-uk.indxeg.com/uploads/settings/stat_3_image_1778955717_e6dabf84.jpg); background-image:var(--stat-img);">
+                        <div class="stat-content"><strong>24/7</strong><span>وصول للتحقق</span></div>
+                    </div>
+                    <div class="stat-card" style="--stat-img:url(https://cardiffcollege-uk.indxeg.com/uploads/settings/stat_4_image_1778955717_1604aca7.jpg); background-image:var(--stat-img);">
+                        <div class="stat-content"><strong>المملكة المتحدة</strong><span>هوية بريطانية مهنية</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== عن الكلية ===== -->
+        <section id="about" class="section about-v2">
+            <div class="container about-grid">
+                <img src="https://cardiffcollege-uk.indxeg.com/uploads/settings/about_image_1778873072_78e63022.jpg" alt="حرم الكلية" />
+                <div>
+                    <span class="eyebrow">🏫 عن الكلية</span>
+                    <h2>التميز في التعليم</h2>
+                    <p>نحن ملتزمون بالتميز الأكاديمي والابتكار والتنمية الشخصية لكل طالب.</p>
+                    <div class="badges">
+                        <span>📖 التعلم عن بعد</span>
+                        <span>📋 دعم شامل للتخطيط</span>
+                        <span>✅ اعتماد أكاديمي</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== فريق القيادة ===== -->
+        <section id="team" class="section leadership">
+            <div class="container">
+                <div class="section-head">
+                    <span class="eyebrow">👥 القيادة</span>
+                    <h2>فريق القيادة</h2>
+                    <p>قادة محترفون وإداريون ذوو خبرة يدعمون نجاح الطلاب.</p>
+                </div>
+                <div class="team-grid">
+                    <article class="team-card">
+                        <img src="https://cardiffcollege-uk.indxeg.com/uploads/team/team_1778873244_05c0f7a1.jpg" alt="المكتب المهني" />
+                        <h3>المكتب المهني</h3>
+                        <strong>خدمات الطلاب</strong>
+                        <p>دعم المتعلمين من خلال القبول والسجلات والتحقق.</p>
+                    </article>
+                    <article class="team-card">
+                        <img src="https://cardiffcollege-uk.indxeg.com/uploads/team/team_1778873296_3f9f52e3.jpg" alt="تنسيق البرامج" />
+                        <h3>تنسيق البرامج</h3>
+                        <strong>البرامج المهنية</strong>
+                        <p>تنسيق المسارات المهنية ومعلومات البرامج.</p>
+                    </article>
+                    <article class="team-card">
+                        <img src="https://cardiffcollege-uk.indxeg.com/uploads/team/team_1778873309_f2c19ac0.jpg" alt="ضمان الجودة" />
+                        <h3>ضمان الجودة</h3>
+                        <strong>مكتب الشهادات</strong>
+                        <p>الحفاظ على سجلات الشهادات الدقيقة والتحقق.</p>
+                    </article>
+                    <article class="team-card">
+                        <img src="https://cardiffcollege-uk.indxeg.com/uploads/team/team_1778873320_73498764.jpg" alt="التعلم عن بعد" />
+                        <h3>التعلم عن بعد</h3>
+                        <strong>خدمات الطلاب</strong>
+                        <p>التعلم عن بعد عبر يونيكاف.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== اتصل بنا ===== -->
+        <section id="contact" class="section contact-section">
+            <div class="container contact-grid">
+                <div>
+                    <span class="eyebrow">📞 اتصل بنا</span>
+                    <h2>تحدث إلى مكتب القبول والشهادات.</h2>
+                    <p>نحن هنا لدعم المتعلمين والشركاء واستفسارات التحقق من الشهادات.</p>
+                </div>
+                <div class="contact-card">
+                    <p><strong>البريد الإلكتروني:</strong> info@cardiffcollege-uk.indxeg.com</p>
+                    <p><strong>العنوان:</strong><br />71-75, Shelton Street, Covent Garden, London, WC2H 9JQ UNITED KINGDOM<br />15442 Ventura Blvd STE 201-1086 Missouri</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== الخريطة ===== -->
+        <section class="map-section">
+            <div class="container">
+                <div class="map-card">
+                    <iframe src="https://www.google.com/maps?q=Cardiff,%20Wales,%20United%20Kingdom&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             قسم التحقق القديم (الاسم + الرمز السري) من الملف الأول
+             ============================================================ -->
+        <section id="student-verify" class="student-verify-section container">
+            <h2>🔍 تحقق من بيانات الطالب</h2>
+            <p class="sub">أدخل الاسم الكامل والرمز السري لعرض الملف الشخصي مع الصورة والشهادة.</p>
+
+            <form class="verify-student-form" id="studentVerifyForm">
+                <div class="field">
+                    <label for="verifyName">👤 الاسم الكامل</label>
+                    <input type="text" id="verifyName" placeholder="اسم الطالب" required />
+                </div>
+                <div class="field">
+                    <label for="verifyPassword">🔑 الرمز السري</label>
+                    <input type="text" id="verifyPassword" placeholder="الرمز السري" required />
+                </div>
+                <div class="actions">
+                    <button class="btn" type="submit">🔍 عرض الملف</button>
+                </div>
+            </form>
+            <div id="verifyResult" style="margin-top:20px; text-align:center; color:#b91c1c; font-weight:500;"></div>
+        </section>
+
+    </main>
+
+    <!-- ===== تذييل الصفحة ===== -->
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <a class="logo footer-logo" href="#">
+                <img class="logo-img" src="https://cardiffcollege-uk.indxeg.com/uploads/settings/site_logo_1778873365_d4afd66f.jpg" alt="Logo" />
+                <span>كلية كارديف<small>المملكة المتحدة</small></span>
+            </a>
+            <div>
+                <a href="#programs">البرامج</a>
+                <a href="#verify">التحقق</a>
+                <a href="#about">عن الكلية</a>
+                <a href="#contact">اتصل بنا</a>
+                <a href="#student-verify">تحقق الطالب</a>
+            </div>
+        </div>
+        <div class="container copyright">© 2026 كلية كارديف. جميع الحقوق محفوظة.</div>
+    </footer>
+
+    <!-- ============================================================
+         نافذة عرض الطالب (للتحقق برقم الشهادة)
+         ============================================================ -->
+    <div class="student-profile-overlay" id="profileOverlay">
+        <div class="profile-modal">
+            <button class="close-btn" id="closeProfileBtn" aria-label="إغلاق">✕</button>
+
+            <div class="profile-grid">
+                <div class="profile-left">
+                    <img class="student-photo" id="pPhoto" src="" alt="صورة الطالب" />
+                    <h1 class="student-name" id="pName">---</h1>
+                    <div class="student-name-en" id="pNameEn">---</div>
+                    <div class="student-id" id="pId">🆔 ---</div>
+                    <div class="student-nationality" id="pNationality">🌍 ---</div>
+                    <div class="cert-badge" id="pBadge">📜 شهادة معتمدة</div>
+                </div>
+
+                <div class="profile-right">
+                    <span class="section-label">📋 تفاصيل الشهادة</span>
+                    <h2>بيانات الطالب الأكاديمية</h2>
+
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <div class="label">رقم الشهادة</div>
+                            <div class="value" id="pCertNumber">---</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="label">الجنسية</div>
+                            <div class="value" id="pNationality2">---</div>
+                        </div>
+                        <div class="detail-item full-width">
+                            <div class="label">المؤهل</div>
+                            <div class="value" id="pQualification">---</div>
+                        </div>
+                        <div class="detail-item full-width">
+                            <div class="label">عنوان البحث / المشروع</div>
+                            <div class="value" id="pResearch">---</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="label">التقدير</div>
+                            <div class="value grade-excellent" id="pGrade">---</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="label">سنة التخرج</div>
+                            <div class="value" id="pYear">---</div>
+                        </div>
+                    </div>
+
+                    <div class="certificate-image-wrap">
+                        <div id="certImageContainer">
+                            <img id="pCertImage" src="" alt="صورة الشهادة" style="display:none;" />
+                            <div class="no-cert" id="noCertMsg">
+                                <span>📄</span>
+                                لا توجد صورة للشهادة
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cert-actions">
+                        <a class="btn btn-primary" id="downloadCertBtn" href="#" target="_blank" style="display:none;">
+                            📥 تحميل الشهادة
+                        </a>
+                        <button class="btn btn-outline" id="closeProfileBtn2">✕ إغلاق</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         نافذة عرض الطالب القديمة (للتحقق بالاسم والرمز السري)
+         ============================================================ -->
+    <div class="student-profile-overlay-legacy" id="studentProfilePage">
+        <div class="student-profile-container">
+            <div class="profile-left-legacy">
+                <button class="close-btn" id="closeProfilePage" aria-label="Close">✕</button>
+                <img class="student-photo" id="profilePhoto" src="" alt="Student photo" />
+                <h1 class="student-name" id="profileName">Name</h1>
+                <p class="student-id" id="profileId">#ID: ---</p>
+                <div class="student-code">
+                    <strong>🔑 الرمز السري:</strong> <span id="profileCode">---</span>
+                </div>
+            </div>
+
+            <div class="profile-right-legacy">
+                <div class="certificate-section">
+                    <span class="certificate-badge">📜 الشهادة</span>
+                    <h2 class="certificate-title">حالة الشهادة</h2>
+                    <div class="certificate-status">
+                        <span class="status-icon" id="certStatusIcon">✅</span>
+                        <span class="status-text" id="certStatusText">مرفوعة</span>
+                    </div>
+
+                    <div class="congrats-text">
+                        <strong>🎉 تهانينا، <span id="congratsName">الطالب</span>!</strong><br />
+                        لقد حققت هذا الإنجاز بنجاح. إن تفانيك ومثابرتك وعملك الجاد قد أتى ثماره حقاً. هذه الشهادة هي دليل على التزامك بالتميز وسعيك المستمر للمعرفة. نحن في <span class="highlight">كلية كارديف المهنية</span> فخورون بإنجازك وواثقون من أنك ستستمر في التألق في جميع مساعيك المستقبلية. <strong>استمر في السعي نحو العظمة!</strong> 🚀
+                    </div>
+
+                    <a id="certificateLinkBtn" href="#" target="_blank" class="certificate-link-btn">
+                        📄 عرض الشهادة
+                    </a>
+
+                    <button class="back-home" id="backHomeBtn">
+                        ← العودة للتحقق
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         كود الجافاسكريبت (دمج المنطقين)
+         ============================================================ -->
+    <script>
+        /**
+         * ============================================================
+         *  قاعدة بيانات الطلاب (موحدة)
+         *  تحتوي على بيانات كلا النظامين
+         * ============================================================ */
+        const STUDENTS = [{
+            // بيانات للتحقق برقم الشهادة + الاسم والرمز السري
+            id: 'STU-001',
+            name: 'دعاء رمضان مصطفى أحمد',
+            nameEn: 'DOAA RAMADAN MOSTAFA AHMED',
+            password: 'doaa2026',
+            certificateNumber: '202604114',
+            nationality: 'مصري',
+            qualification: 'درجة الدكتوراه المهنية في الصحة النفسية وتعديل السلوك',
+            research: 'درجة ممتاز',
+            grade: 'ممتاز',
+            graduationYear: '2026',
+            photo: 'https://via.placeholder.com/400/2563eb/ffffff?text=دعاء',
+            certificateImage: 'https://cardiffcollege-uk.indxeg.com/uploads/certificates/202604114.jpg',
+            certificate: 'https://cardiffcollege-uk.indxeg.com/uploads/certificates/202604114.jpg' // للتحقق القديم
+        }, {
+            id: 'STU-002',
+            name: 'أحمد محمد عبدالله',
+            nameEn: 'AHMED MOHAMED ABDULLAH',
+            password: 'ahmed123',
+            certificateNumber: '202501001',
+            nationality: 'مصري',
+            qualification: 'ماجستير في إدارة الأعمال',
+            research: 'تأثير القيادة التحويلية على الأداء المؤسسي',
+            grade: 'جيد جداً',
+            graduationYear: '2025',
+            photo: 'https://via.placeholder.com/400/0b1a2f/ffffff?text=أحمد',
+            certificateImage: '',
+            certificate: ''
+        }, {
+            id: 'STU-003',
+            name: 'سارة خالد الأمير',
+            nameEn: 'SARA KHALED AL-AMIR',
+            password: 'sara456',
+            certificateNumber: '202502002',
+            nationality: 'سعودية',
+            qualification: 'دبلوم عالي في التمريض',
+            research: 'رعاية مرضى السكري من النوع الثاني',
+            grade: 'ممتاز',
+            graduationYear: '2025',
+            photo: 'https://via.placeholder.com/400/16a34a/ffffff?text=سارة',
+            certificateImage: '',
+            certificate: ''
+        }];
+
+        // ============================================================
+        //  عناصر التحقق برقم الشهادة
+        // ============================================================
+        const certForm = document.getElementById('verifyForm');
+        const certInput = document.getElementById('certNumberInput');
+        const errorDiv = document.getElementById('verifyError');
+        const overlay = document.getElementById('profileOverlay');
+
+        const pPhoto = document.getElementById('pPhoto');
+        const pName = document.getElementById('pName');
+        const pNameEn = document.getElementById('pNameEn');
+        const pId = document.getElementById('pId');
+        const pNationality = document.getElementById('pNationality');
+        const pNationality2 = document.getElementById('pNationality2');
+        const pQualification = document.getElementById('pQualification');
+        const pResearch = document.getElementById('pResearch');
+        const pGrade = document.getElementById('pGrade');
+        const pYear = document.getElementById('pYear');
+        const pCertNumber = document.getElementById('pCertNumber');
+        const pBadge = document.getElementById('pBadge');
+        const pCertImage = document.getElementById('pCertImage');
+        const noCertMsg = document.getElementById('noCertMsg');
+        const downloadBtn = document.getElementById('downloadCertBtn');
+
+        const closeBtns = document.querySelectorAll('#closeProfileBtn, #closeProfileBtn2');
+
+        // ============================================================
+        //  عناصر التحقق القديم (الاسم + الرمز السري)
+        // ============================================================
+        const legacyForm = document.getElementById('studentVerifyForm');
+        const nameInput = document.getElementById('verifyName');
+        const passInput = document.getElementById('verifyPassword');
+        const resultDiv = document.getElementById('verifyResult');
+
+        const legacyProfile = document.getElementById('studentProfilePage');
+        const closeProfileBtn = document.getElementById('closeProfilePage');
+        const backHomeBtn = document.getElementById('backHomeBtn');
+        const profilePhoto = document.getElementById('profilePhoto');
+        const profileName = document.getElementById('profileName');
+        const profileId = document.getElementById('profileId');
+        const profileCode = document.getElementById('profileCode');
+        const certStatusIcon = document.getElementById('certStatusIcon');
+        const certStatusText = document.getElementById('certStatusText');
+        const certificateLinkBtn = document.getElementById('certificateLinkBtn');
+        const congratsName = document.getElementById('congratsName');
+
+        // ============================================================
+        //  دوال البحث المشتركة
+        // ============================================================
+
+        function findStudentByCert(certNumber) {
+            return STUDENTS.find(s => s.certificateNumber && s.certificateNumber.trim() === certNumber.trim());
+        }
+
+        function findStudentByNamePass(name, password) {
+            return STUDENTS.find(s =>
+                s.name.trim().toLowerCase() === name.trim().toLowerCase() &&
+                s.password === password.trim()
+            );
+        }
+
+        // ============================================================
+        //  دوال عرض الملف المتقدم (برقم الشهادة)
+        // ============================================================
+
+        function openAdvancedProfile(student) {
+            pPhoto.src = student.photo || 'https://via.placeholder.com/400/e2e8f0/0b1a2f?text=+';
+            pPhoto.alt = student.name;
+            pName.textContent = student.name;
+            pNameEn.textContent = student.nameEn || '---';
+            pId.textContent = '🆔 ' + (student.certificateNumber || student.id);
+            pNationality.textContent = '🌍 ' + (student.nationality || '---');
+            pNationality2.textContent = student.nationality || '---';
+            pQualification.textContent = student.qualification || '---';
+            pResearch.textContent = student.research || '---';
+            pGrade.textContent = student.grade || '---';
+            pYear.textContent = student.graduationYear || '---';
+            pCertNumber.textContent = student.certificateNumber || student.id;
+            pBadge.textContent = '📜 شهادة معتمدة';
+
+            const certImg = student.certificateImage || student.certificate;
+            if (certImg && certImg.trim() !== '') {
+                pCertImage.src = certImg;
+                pCertImage.style.display = 'block';
+                noCertMsg.style.display = 'none';
+                downloadBtn.style.display = 'inline-block';
+                downloadBtn.href = certImg;
+            } else {
+                pCertImage.style.display = 'none';
+                noCertMsg.style.display = 'block';
+                downloadBtn.style.display = 'none';
+            }
+
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            errorDiv.textContent = '';
+        }
+
+        function closeAdvancedProfile() {
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // ============================================================
+        //  دوال عرض الملف القديم (بالاسم والرمز)
+        // ============================================================
+
+        function openLegacyProfile(student) {
+            profilePhoto.src = student.photo || 'https://via.placeholder.com/400/e2e8f0/0b1a2f?text=+';
+            profileName.textContent = student.name;
+            profileId.textContent = '#ID: ' + (student.id || '---');
+            profileCode.textContent = student.password || '---';
+            congratsName.textContent = student.name;
+
+            const cert = student.certificate || student.certificateImage;
+            if (cert && cert.trim() !== '') {
+                certStatusIcon.textContent = '✅';
+                certStatusText.textContent = 'مرفوعة';
+                certStatusText.className = 'status-text uploaded';
+                certificateLinkBtn.href = cert;
+                certificateLinkBtn.style.display = 'inline-block';
+                certificateLinkBtn.classList.remove('disabled');
+            } else {
+                certStatusIcon.textContent = '❌';
+                certStatusText.textContent = 'غير مرفوعة';
+                certStatusText.className = 'status-text not-uploaded';
+                certificateLinkBtn.style.display = 'none';
+                certificateLinkBtn.classList.add('disabled');
+            }
+
+            legacyProfile.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            resultDiv.textContent = '';
+        }
+
+        function closeLegacyProfile() {
+            legacyProfile.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // ============================================================
+        //  ربط الأحداث
+        // ============================================================
+
+        // 1. نموذج التحقق برقم الشهادة
+        certForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const certNumber = certInput.value.trim();
+
+            if (!certNumber) {
+                errorDiv.textContent = '⚠️ الرجاء إدخال رقم الشهادة.';
+                closeAdvancedProfile();
+                return;
+            }
+
+            const student = findStudentByCert(certNumber);
+            if (student) {
+                openAdvancedProfile(student);
+            } else {
+                errorDiv.textContent = '❌ لا توجد شهادة بهذا الرقم. يرجى التأكد من الرقم المدخل.';
+                closeAdvancedProfile();
+            }
+        });
+
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', closeAdvancedProfile);
+        });
+
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) closeAdvancedProfile();
+        });
+
+        // 2. نموذج التحقق القديم (الاسم + الرمز السري)
+        legacyForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = nameInput.value.trim();
+            const password = passInput.value.trim();
+
+            if (!name || !password) {
+                resultDiv.textContent = '⚠️ الرجاء إدخال الاسم والرمز السري.';
+                return;
+            }
+
+            const student = findStudentByNamePass(name, password);
+            if (student) {
+                openLegacyProfile(student);
+            } else {
+                resultDiv.textContent = '❌ لا يوجد طالب بهذه البيانات. يرجى التحقق من الاسم والرمز السري.';
+                closeLegacyProfile();
+            }
+        });
+
+        closeProfileBtn.addEventListener('click', closeLegacyProfile);
+        backHomeBtn.addEventListener('click', closeLegacyProfile);
+
+        // 3. إغلاق النوافذ عند الضغط على Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (overlay.classList.contains('open')) closeAdvancedProfile();
+                if (legacyProfile.classList.contains('open')) closeLegacyProfile();
+            }
+        });
+
+        // ============================================================
+        //  زر القائمة للشاشات الصغيرة
+        // ============================================================
+        const menuToggle = document.getElementById('menuToggle');
+        const siteMenu = document.getElementById('siteMenu');
+        if (menuToggle && siteMenu) {
+            menuToggle.addEventListener('click', function() {
+                siteMenu.classList.toggle('open');
+            });
+        }
+    </script>
+
+</body>
+</html>
